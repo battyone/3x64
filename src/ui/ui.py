@@ -88,7 +88,7 @@ class UI:
 
     @staticmethod 
     def get_block_symbol(block):
-        return '▓' if block == ' ' else '█'
+        return '▓' if block == '0' else '█'
 
     def draw_block(self, screen, x, y, block, char):
         size = self.get_block_size(screen)
