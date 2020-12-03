@@ -1,15 +1,17 @@
-def draw_left_panel(ui, screen):
-    ui.draw_panel(screen, __get(ui), 0, 0, ui.colors['ui'])
+from .painter import draw_panel
 
-def __get(ui):
-    stats = ui.game.stats
+def draw_left_panel(client, screen):
+    draw_panel(screen, __get(client), 0, 0, client.palettes['ui'])
+
+def __get(client):
+    state = client.game.state
     return [
         "┌─Stats────────",
-       f"│ Score: {stats.score:05d}",
+       f"│ Score: {state.score:05d}",
         "├──────────────",
-       f"│ Level: {stats.get_level()}",
+       f"│ Level: {state.get_level()}",
         "├──────────────",
-       f"│ Time:  {stats.play_time//60:02d}:{stats.play_time%60:02d}",
+       f"│ Time:  {state.play_time//60:02d}:{state.play_time%60:02d}",
         "╞═Controls═════",
         "│[a][s][d] Move",
         "│[←][↓][→]",
