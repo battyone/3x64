@@ -1,3 +1,4 @@
+from typing import Tuple
 from random import randint
 from ..models.block import Block
 
@@ -18,7 +19,7 @@ def get_random_block(game):
         return Block.Iron()
     return Block.Color(randint(0, 3))
 
-Item = tuple[Block, int, int] # (Block, x, y)
+Item = Tuple[Block, int, int] # (Block, x, y)
 Sequence = [Item]
 
 def get_all_rows(board: [[Block]], predicate=lambda _: True) -> [Sequence]:
