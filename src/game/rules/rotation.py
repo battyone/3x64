@@ -14,3 +14,4 @@ def handle_rotation(game):
     pull_down(game)
     handle_collisions(game)
     game.state.time_to_rotate = game.settings.max_time_to_rotate
+    game.state.board.sides = game.state.board.sides[-1:] + game.state.board.sides[:-1]
