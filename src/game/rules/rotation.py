@@ -1,5 +1,6 @@
 from .helpers import get_all_cols, Sequence
 from .gravity import pull_down
+from .collision import handle_collisions
 
 def handle_rotation(game):
     def rotate():
@@ -11,5 +12,5 @@ def handle_rotation(game):
         return
     rotate()
     pull_down(game)
+    handle_collisions(game)
     game.state.time_to_rotate = game.settings.max_time_to_rotate
-
