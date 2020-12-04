@@ -1,5 +1,6 @@
 from .helpers import is_avaliable, get_random_block, get_default_pos
 from .collision import handle_collisions
+from .rotation import handle_rotation
 
 def can_move(game) -> bool:
     return not (game.is_over() or game.state.paused)
@@ -28,6 +29,7 @@ def move_down(game):
         game.state.board.xy[y][x] = game.state.board.cur_block
         start_new_block()
         handle_collisions(game)
+        handle_rotation(game)
 
     def start_new_block():
         game.state.board.cur_block = game.state.board.next_block
