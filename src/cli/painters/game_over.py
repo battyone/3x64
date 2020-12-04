@@ -1,7 +1,7 @@
 from .painter import get_block_size, draw_panel
 
 def draw_game_over(client, screen):
-    width = get_block_size(client, screen) * len(client.game.state.board) * 2
+    width = get_block_size(client, screen) * len(client.game.state.board.xy) * 2
     start_y = width//4 - 1
     draw_panel(screen, __get(client, width), 15, start_y, client.palettes['ui'])
 
