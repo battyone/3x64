@@ -20,7 +20,7 @@ def draw_next_block(client, screen):
     draw_block(client, screen, x, y, block, '▓')
 
 def get_block_symbol(block):
-    return '▓' if block.iron else '█'
+    return '▓' if block.iron else ' '
 
 def draw_block(client, screen, x, y, block, char):
     size = get_block_size(client, screen)
