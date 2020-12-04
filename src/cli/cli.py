@@ -18,6 +18,7 @@ class CLI:
             init_color('ui', 8, 0)
             init_color('iron', 8, 0)
             for i, fg in enumerate([4, 6, 2, 1]):
+                init_color(f'{i}-side', 0, fg)
                 init_color(i, fg, 0)
 
         def init_color(key, fg, bg):
