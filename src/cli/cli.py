@@ -5,6 +5,7 @@ from .painters.board import draw_board_frame
 from .painters.right_panel import draw_right_panel
 from .painters.game_over import draw_game_over
 from .painters.blocks import draw_blocks, draw_cur_block, draw_next_block
+from .painters.pause import draw_pause
 
 class CLI:
     def __init__(self, game: Game):
@@ -33,6 +34,8 @@ class CLI:
             draw_cur_block(self, screen)
             if self.game.is_over():
                 draw_game_over(self, screen)
+            if self.game.state.paused:
+                draw_pause(self, screen)
 
         def handle_key(key):
             if key == ord('q'):
