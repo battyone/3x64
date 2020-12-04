@@ -16,8 +16,8 @@ class CLI:
         def init_colors():
             init_color('ui', 8, 0)
             init_color('iron', 8, 0)
-            for i, bg in enumerate([4, 6, 2, 1]):
-                init_color(i, 0, bg)
+            for i, fg in enumerate([4, 6, 2, 1]):
+                init_color(i, fg, 0)
 
         def init_color(key, fg, bg):
             i = len(self.palettes.keys()) + 1

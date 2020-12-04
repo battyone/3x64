@@ -1,5 +1,6 @@
 from game.rules.helpers import get_default_pos
 from .painter import get_block_size
+from .board import get_board_left, get_board_top
 
 def draw_blocks(client, screen):
     size = len(client.game.state.board.xy)
@@ -20,12 +21,12 @@ def draw_next_block(client, screen):
     draw_block(client, screen, x, y, block, '▓')
 
 def get_block_symbol(block):
-    return '▓' if block.iron else ' '
+    return '▓' if block.iron else '█'
 
 def draw_block(client, screen, x, y, block, char):
     size = get_block_size(client, screen)
-    left = 2 * x * size
-    top = y * size
+    left = 2 * x * size + get_board_left(client, screen)
+    top = y * size + get_board_top(client, screen)
     for row in range(size):
         color = 'iron' if block.iron else block.color
-        screen.addstr(1 + row + top, 16 + left, char * size * 2, client.palettes[color])
+        screen.addstr(1 + row + top, 1 + left, char * size * 2, client.palettes[color])

@@ -1,11 +1,13 @@
 from .painter import draw_panel, get_block_size
+from .board import get_board_left, get_board_top
 
 def draw_right_panel(client, screen):
-    left_panel_width = 15
-    board_width = 2 * get_block_size(client, screen) * len(client.game.state.board.xy) + 2
-    x = left_panel_width + board_width
-
-    draw_panel(screen, __get(client), x, 0, client.palettes['ui'])
+    draw_panel(
+        screen,
+        __get(client),
+        get_board_left(client, screen) + get_block_size(client, screen) * 2 * len(client.game.state.board.xy) + 2,
+        get_board_top(client, screen),
+        client.palettes['ui'])
 
 def __get(client):
     return [
