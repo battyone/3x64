@@ -16,7 +16,7 @@ def is_avaliable(game, x: int, y: int) -> bool:
 def get_random_block(game):
     if randint(0, 100) < 20:
         return Block.Iron()
-    return Block.Color(randint(0, game.settings.color_count - 1))
+    return Block.Color(randint(0, 3))
 
 Item = tuple[Block, int, int] # (Block, x, y)
 Sequence = [Item]
