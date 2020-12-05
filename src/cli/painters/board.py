@@ -18,10 +18,10 @@ def get_top_frame(width):
 
 def get_bottom_frame(client, width):
     progress = get_progress(client, width)
-    frame = ['═' * progress + '┄' * (width - progress)]
+    frame = '═' * progress + '┄' * (width - progress)
     if client.game.state.board.clockwise:
-        return frame
-    return frame[::-1]
+        return [frame[::-1]]
+    return [frame]
 
 def get_vertical_frame(height):
     return ['║' for _ in range(height)]
@@ -35,7 +35,7 @@ def get_angles(width):
 
 def get_progress(client, width):
     game = client.game
-    return max(0, game.state.time_to_rotate) * width // game.settings.max_time_to_rotate
+    return max(0, game.state.board.time_to_rotate) * width // game.settings.max_time_to_rotate
 
 def get_board_left(client, screen):
     y, x = screen.getmaxyx()

@@ -13,7 +13,7 @@ def handle_rotation(game):
         for y in range(len(cols)):
             game.state.board.xy[-y-1] = [block for (block, _, _) in cols[y]]
 
-    if game.state.time_to_rotate > 0:
+    if game.state.board.time_to_rotate > 0:
         return
     if game.state.board.clockwise:
         rotate_clockwise()
@@ -21,7 +21,7 @@ def handle_rotation(game):
     else:
         rotate_counterclockwise()
         game.state.board.sides = game.state.board.sides[1:] + game.state.board.sides[:1]
-        
+
     pull_down(game)
     handle_collisions(game)
-    game.state.time_to_rotate = game.settings.max_time_to_rotate
+    game.state.board.time_to_rotate = game.settings.max_time_to_rotate

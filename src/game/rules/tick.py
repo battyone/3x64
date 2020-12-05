@@ -13,7 +13,7 @@ def tick(game):
         return 1 / (2 * level) if iron else 1 / level
 
     game.state.play_time += 1
-    game.state.time_to_rotate -= 1
+    game.state.board.time_to_rotate -= 1
     move_down(game)
 
     if can_move(game):
