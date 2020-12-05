@@ -38,11 +38,13 @@ def handle_collisions(game):
 
     blocks : [Item] = list(get_blocks_to_delete())
     if blocks:
-        game.state.score += len(blocks)
         game.state.last_event = (game.state.play_time, f'+{len(blocks)}')
         for (_, x, y) in blocks:
             game.state.board.xy[y][x] = None
         pull_down(game)
         handle_collisions(game)
     if game.state.board.sides[0] in list(map(lambda item: item[0].color, blocks)):
+        game.state.score += 2 * len(blocks)
         give_random_bonus(game)
+    else:
+        game.state.score += len(blocks)

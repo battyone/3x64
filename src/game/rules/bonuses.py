@@ -2,13 +2,17 @@ from random import choice
 from ..models.block import Block
 from ..models.bonus import Bonus
 from .helpers import is_in_bounds
+from .gravity import pull_down
 
 def anvil(game):
     def place(board, x, y):
+        count = 0
         for dy in range(1, 4):
             if is_in_bounds(board, x, y + dy):
                 board.xy[y + dy][x] = None
-                game.state.score += 1
+                count += 1
+        game.state.score += count
+        game.state.last_event = (game.state.play_time, f'+ {count}')
     game.state.board.next_block = Block.Bonus('anvil', place)
 
 def change_direction(game):
@@ -18,9 +22,17 @@ def change_direction(game):
     )
     game.state.board.clockwise = not game.state.board.clockwise
 
+def remove_line(game):
+    blocks = [block for block in game.state.board.xy[-1] if block is not None]
+    game.state.board.xy[-1] = [None for _ in range(len(game.state.board.xy))]
+    pull_down(game)
+    game.state.score += len(blocks)
+    game.state.last_event = (game.state.play_time, f'+ {len(blocks)}')
+
 all_bonuses = [
     Bonus('Anvil', anvil),
-    Bonus('Change Dir.', change_direction)
+    Bonus('Change Dir.', change_direction),
+    Bonus('Remove Line', remove_line)
 ]
 
 def give_random_bonus(game):
