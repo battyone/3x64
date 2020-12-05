@@ -17,11 +17,11 @@ class CLI:
         def init_colors():
             init_color('iron', 8, 0)
             init_color('white', 7, 0)
-            init_color('Anvil', 234, 234)
+            init_color('anvil', 234, 234)
             self.palettes['ui'] = self.palettes['iron']
             for i, fg in enumerate([4, 6, 2, 1]):
                 init_color(f'{i}-side', 7, fg)
-                init_color(i, fg, 0)
+                init_color(f'{i}', fg, 0)
 
         def init_color(key, fg, bg):
             i = len(self.palettes.keys()) + 1

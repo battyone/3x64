@@ -26,14 +26,14 @@ def move_down(game):
         x, y = game.state.board.cur_pos
         if is_avaliable(game, x, y+1):
             return
-        game.state.board.cur_block.handle_block_place(game.state.board, x, y)
+        game.state.board.cur_block.on_place(game.state.board, x, y)
         start_new_block()
         handle_collisions(game)
         handle_rotation(game)
 
     def start_new_block():
         game.state.board.cur_block = game.state.board.next_block
-        game.state.board.next_block = get_random_block(game)
+        game.state.board.next_block = get_random_block()
         game.state.board.cur_pos = get_default_pos(game)
 
     x, y = game.state.board.cur_pos

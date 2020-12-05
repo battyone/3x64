@@ -7,7 +7,8 @@ def draw_left_panel(client, screen):
         __get(client),
         get_board_left(client, screen) - 15,
         get_board_top(client, screen),
-        client.palettes['ui'])
+        client.palettes['ui']
+    )
 
 def __get(client):
     state = client.game.state

@@ -5,7 +5,7 @@ from .models.settings import Settings
 from .models.state import State
 from .rules.helpers import get_default_pos, is_avaliable, get_random_block
 from .rules.tick import tick
-from .rules.bonus import use_bonus
+from .rules.bonuses import use_bonus
 
 class Game:
     def __init__(self, state: State, settings: Settings):
@@ -25,8 +25,8 @@ class Game:
 
     def start(self):
         self.state.paused = False
-        self.state.board.cur_block = get_random_block(self)
-        self.state.board.next_block = get_random_block(self)
+        self.state.board.cur_block = get_random_block()
+        self.state.board.next_block = get_random_block()
         self.state.board.cur_pos = get_default_pos(self)
         tick(self)
 

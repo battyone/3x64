@@ -1,5 +1,6 @@
 from __future__ import annotations
 from .settings import Settings
+from .bonus import Bonus
 from .board import Board
 
 class State:
@@ -10,7 +11,10 @@ class State:
         self.score          : int      = score
         self.play_time      : int      = play_time
         self.time_to_rotate : int      = time_to_rotate
-        self.bonuses        : [str]    = bonuses
+        self.bonuses        : [Bonus]  = bonuses
+
+    def get_level(self) -> int:
+        return 1 + self.score // 100
 
     @staticmethod
     def New_Game(settings: Settings) -> State:
@@ -22,6 +26,3 @@ class State:
             time_to_rotate = settings.max_time_to_rotate,
             bonuses        = []
         )
-
-    def get_level(self) -> int:
-        return 1 + self.score // 100

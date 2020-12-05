@@ -15,7 +15,7 @@ def is_in_bounds(board, x: int, y: int):
 def is_avaliable(game, x: int, y: int) -> bool:
     return is_in_bounds(game.state.board, x, y) and game.state.board.xy[y][x] is None
 
-def get_random_block(game):
+def get_random_block():
     if randint(0, 100) < 20:
         return Block.Iron()
     return Block.Color(randint(0, 3))

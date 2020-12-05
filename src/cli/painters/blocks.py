@@ -27,20 +27,15 @@ def get_block_symbol(client, block):
         return '?'
     return '█'
 
-def get_block_color(client, block):
-    if block.iron:
-        return 'iron'
-    if block.color is not None:
-        if block.color == client.game.state.board.sides[0]:
-            return f'{block.color}-side'
-        return block.color
-    if block.bonus is not None:
-        return block.bonus
-
+def get_block_palette(client, block):
+    if block.color == client.game.state.board.sides[0]:
+        return client.palettes[f'{block.color}-side']
+    return client.palettes[block.name]
+    
 def draw_block(client, screen, x, y, block):
     size = get_block_size(client, screen)
     left = 2 * x * size + get_board_left(client, screen)
     top = y * size + get_board_top(client, screen)
     for row in range(size):
-        palette = client.palettes[get_block_color(client, block)]
+        palette = get_block_palette(client, block)
         screen.addstr(1 + row + top, 1 + left, get_block_symbol(client, block) * size * 2, palette)

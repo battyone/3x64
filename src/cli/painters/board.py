@@ -1,4 +1,4 @@
-from .painter import get_block_size, draw_panel
+from .painter import get_block_size, draw_panel, get_palette_by_side
 
 def draw_board_frame(client, screen):
     block = get_block_size(client, screen)
@@ -8,16 +8,16 @@ def draw_board_frame(client, screen):
     top = get_board_top(client, screen)
 
     draw_panel(screen, get_angles(width), left, top, client.palettes['ui'])
-    draw_panel(screen, get_vertical_frame(width//2), left+width+1, top+1, client.palettes[client.game.state.board.sides[3]])
-    draw_panel(screen, get_top_frame(width), left+1, top, client.palettes[client.game.state.board.sides[2]])
-    draw_panel(screen, get_vertical_frame(width//2), left, top+1, client.palettes[client.game.state.board.sides[1]])
-    draw_panel(screen, get_bottom_frame(client, width), left+1, top+width//2+1, client.palettes[client.game.state.board.sides[0]])
+    draw_panel(screen, get_vertical_frame(width//2), left+width+1, top+1, get_palette_by_side(client, 3))
+    draw_panel(screen, get_top_frame(width), left+1, top, get_palette_by_side(client, 2))
+    draw_panel(screen, get_vertical_frame(width//2), left, top+1, get_palette_by_side(client, 1))
+    draw_panel(screen, get_bottom_frame(client, width), left+1, top+width//2+1,get_palette_by_side(client))
 
 def get_top_frame(width):
     return ['═' * width]
 
 def get_bottom_frame(client, width):
-    progress = __get_progress(client, width)
+    progress = get_progress(client, width)
     frame = ['═' * progress + '┄' * (width - progress)]
     if client.game.state.board.clockwise:
         return frame
@@ -33,8 +33,9 @@ def get_angles(width):
             f"╚{' ' * width}╝"
     ]
 
-def __get_progress(client, width):
-    return max(0, client.game.state.time_to_rotate) * width // client.game.settings.max_time_to_rotate
+def get_progress(client, width):
+    game = client.game
+    return max(0, game.state.time_to_rotate) * width // game.settings.max_time_to_rotate
 
 def get_board_left(client, screen):
     y, x = screen.getmaxyx()

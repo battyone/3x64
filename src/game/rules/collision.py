@@ -1,7 +1,7 @@
 from ..models.block import Block
 from .helpers import Sequence, Item, get_all_rows, get_all_cols
 from .gravity import pull_down
-from .bonus import give_random_bonus
+from .bonuses import give_random_bonus
 
 def handle_collisions(game):
     def get_blocks_to_delete():
