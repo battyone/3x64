@@ -12,7 +12,10 @@ def anvil(game):
     game.state.board.next_block = Block.Bonus('anvil', place)
 
 def change_direction(game):
-    game.state.board.time_to_rotate = game.settings.max_time_to_rotate - game.state.board.time_to_rotate
+    game.state.board.time_to_rotate = min(
+        game.settings.max_time_to_rotate,
+        game.settings.max_time_to_rotate - game.state.board.time_to_rotate
+    )
     game.state.board.clockwise = not game.state.board.clockwise
 
 all_bonuses = [
