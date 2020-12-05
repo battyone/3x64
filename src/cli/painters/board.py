@@ -18,8 +18,10 @@ def get_top_frame(width):
 
 def get_bottom_frame(client, width):
     progress = __get_progress(client, width)
-    return ['═' * progress + '┄' * (width - progress)]
-
+    frame = ['═' * progress + '┄' * (width - progress)]
+    if client.game.state.board.clockwise:
+        return frame
+    return frame[::-1]
 
 def get_vertical_frame(height):
     return ['║' for _ in range(height)]

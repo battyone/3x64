@@ -15,10 +15,12 @@ class CLI:
 
     def main(self, screen):
         def init_colors():
-            init_color('ui', 8, 0)
             init_color('iron', 8, 0)
+            init_color('white', 7, 0)
+            init_color('Anvil', 234, 234)
+            self.palettes['ui'] = self.palettes['iron']
             for i, fg in enumerate([4, 6, 2, 1]):
-                init_color(f'{i}-side', 0, fg)
+                init_color(f'{i}-side', 7, fg)
                 init_color(i, fg, 0)
 
         def init_color(key, fg, bg):
@@ -50,6 +52,8 @@ class CLI:
                 self.game.move_down()
             if key == ord('p'):
                 self.game.pause()
+            if ord('1') <= key <= ord('5'):
+                self.game.use_bonus(int(chr(key))-1)
 
         init_colors()
         curses.curs_set(0)

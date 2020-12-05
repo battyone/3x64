@@ -1,6 +1,7 @@
 from ..models.block import Block
 from .helpers import Sequence, Item, get_all_rows, get_all_cols
 from .gravity import pull_down
+from .bonus import give_random_bonus
 
 def handle_collisions(game):
     def get_blocks_to_delete():
@@ -36,6 +37,8 @@ def handle_collisions(game):
         yield from get_all_cols(board)
 
     blocks : [Item] = list(get_blocks_to_delete())
+    if game.state.board.sides[0] in list(map(lambda item: item[0].color, blocks)):
+        give_random_bonus(game)
     if blocks:
         game.state.score += len(blocks)
         for (_, x, y) in blocks:

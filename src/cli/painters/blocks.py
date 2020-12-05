@@ -8,17 +8,17 @@ def draw_blocks(client, screen):
         for x in range(size):
             block = client.game.state.board.xy[y][x]
             if block is not None:
-                draw_block(client, screen, x, y, block, get_block_symbol(client, block))
+                draw_block(client, screen, x, y, block)
 
 def draw_cur_block(client, screen):
     x, y = client.game.state.board.cur_pos
     block = client.game.state.board.cur_block
-    draw_block(client, screen, x, y, block, get_block_symbol(client, block))
+    draw_block(client, screen, x, y, block)
 
 def draw_next_block(client, screen):
     x, y = get_default_pos(client.game)
     block = client.game.state.board.next_block
-    draw_block(client, screen, x, y, block, '▓')
+    draw_block(client, screen, x, y, block)
 
 def get_block_symbol(client, block):
     if block.iron:
@@ -27,11 +27,20 @@ def get_block_symbol(client, block):
         return '?'
     return '█'
 
-def draw_block(client, screen, x, y, block, char):
+def get_block_color(client, block):
+    if block.iron:
+        return 'iron'
+    if block.color is not None:
+        if block.color == client.game.state.board.sides[0]:
+            return f'{block.color}-side'
+        return block.color
+    if block.bonus is not None:
+        return block.bonus
+
+def draw_block(client, screen, x, y, block):
     size = get_block_size(client, screen)
     left = 2 * x * size + get_board_left(client, screen)
     top = y * size + get_board_top(client, screen)
     for row in range(size):
-        color = 'iron' if block.iron else block.color
-        palette = client.palettes[f'{color}-side'] if block.color == client.game.state.board.sides[0] else client.palettes[color]
-        screen.addstr(1 + row + top, 1 + left, char * size * 2, palette)
+        palette = client.palettes[get_block_color(client, block)]
+        screen.addstr(1 + row + top, 1 + left, get_block_symbol(client, block) * size * 2, palette)

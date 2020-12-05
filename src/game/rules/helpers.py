@@ -8,11 +8,12 @@ def get_default_pos(game) -> (int, int):
         0
     )
 
+def is_in_bounds(board, x: int, y: int):
+    return (0 <= x < len(board.xy) and
+            0 <= y < len(board.xy))
+
 def is_avaliable(game, x: int, y: int) -> bool:
-    return (0 <= x < len(game.state.board.xy) and
-            0 <= y < len(game.state.board.xy) and
-            game.state.board.xy[y][x] is None
-    )
+    return is_in_bounds(game.state.board, x, y) and game.state.board.xy[y][x] is None
 
 def get_random_block(game):
     if randint(0, 100) < 20:

@@ -5,6 +5,7 @@ from .models.settings import Settings
 from .models.state import State
 from .rules.helpers import get_default_pos, is_avaliable, get_random_block
 from .rules.tick import tick
+from .rules.bonus import use_bonus
 
 class Game:
     def __init__(self, state: State, settings: Settings):
@@ -44,3 +45,6 @@ class Game:
 
     def move_down(self):
         game.rules.move.move_down(self)
+
+    def use_bonus(self, i):
+        use_bonus(self, i)
