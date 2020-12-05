@@ -17,9 +17,11 @@ def handle_rotation(game):
         return
     if game.state.board.clockwise:
         rotate_clockwise()
+        game.state.last_event = (game.state.play_time, '> ROTATE >')
         game.state.board.sides = game.state.board.sides[-1:] + game.state.board.sides[:-1]
     else:
         rotate_counterclockwise()
+        game.state.last_event = (game.state.play_time, '< ROTATE <')
         game.state.board.sides = game.state.board.sides[1:] + game.state.board.sides[:1]
 
     pull_down(game)

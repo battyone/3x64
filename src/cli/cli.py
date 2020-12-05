@@ -6,6 +6,7 @@ from .painters.right_panel import draw_right_panel
 from .painters.game_over import draw_game_over
 from .painters.blocks import draw_blocks, draw_cur_block, draw_next_block
 from .painters.pause import draw_pause
+from .painters.status_bar import draw_status_bar
 
 class CLI:
     def __init__(self, game: Game):
@@ -31,6 +32,7 @@ class CLI:
         def draw_all():
             draw_left_panel(self, screen)
             draw_board_frame(self, screen)
+            draw_status_bar(self, screen)
             draw_right_panel(self, screen)
             draw_blocks(self, screen)
             draw_next_block(self, screen)

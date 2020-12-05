@@ -24,11 +24,17 @@ all_bonuses = [
 ]
 
 def give_random_bonus(game):
-    game.state.bonuses.append(
-        choice(all_bonuses)
-    )
+    if len(game.state.bonuses) < 3:
+        game.state.bonuses.append(
+            choice(all_bonuses)
+        )
+        game.state.last_event = (game.state.play_time, f'+ {game.state.bonuses[-1].name}')
+    else:
+        game.state.score += 10
+        game.state.last_event = (game.state.play_time, '+10')
 
 def use_bonus(game, i):
     if len(game.state.bonuses) <= i:
         return
+    game.state.last_event = (game.state.play_time, f'- {game.state.bonuses[i].name}')
     game.state.bonuses.pop(i).on_call(game)

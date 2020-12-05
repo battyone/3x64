@@ -37,11 +37,12 @@ def handle_collisions(game):
         yield from get_all_cols(board)
 
     blocks : [Item] = list(get_blocks_to_delete())
-    if game.state.board.sides[0] in list(map(lambda item: item[0].color, blocks)):
-        give_random_bonus(game)
     if blocks:
         game.state.score += len(blocks)
+        game.state.last_event = (game.state.play_time, f'+{len(blocks)}')
         for (_, x, y) in blocks:
             game.state.board.xy[y][x] = None
         pull_down(game)
         handle_collisions(game)
+    if game.state.board.sides[0] in list(map(lambda item: item[0].color, blocks)):
+        give_random_bonus(game)

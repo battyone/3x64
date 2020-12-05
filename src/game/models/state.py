@@ -4,15 +4,18 @@ from .bonus import Bonus
 from .board import Board
 
 class State:
-    def __init__(self, board: Board, paused: bool, score: int, play_time: int, bonuses: [str]):
-        self.board          : Board    = board
-        self.paused         : bool     = paused
-        self.score          : int      = score
-        self.play_time      : int      = play_time
-        self.bonuses        : [Bonus]  = bonuses
+    def __init__(self, board: Board, paused: bool, score: int, play_time: int, bonuses: [str], score_to_level: int):
+        self.board          : Board     = board
+        self.paused         : bool      = paused
+        self.score          : int       = score
+        self.play_time      : int       = play_time
+        self.bonuses        : [Bonus]   = bonuses
+        self.last_event     : (int,str) = None     # (game_ticks, message)
+
+        self.score_to_level : int       = score_to_level
 
     def get_level(self) -> int:
-        return 1 + self.score // 100
+        return 1 + self.score // self.score_to_level
 
     @staticmethod
     def New_Game(settings: Settings) -> State:
@@ -21,5 +24,6 @@ class State:
             paused         = True,
             score          = 0,
             play_time      = 0,
-            bonuses        = []
+            bonuses        = [],
+            score_to_level = settings.score_to_level
         )

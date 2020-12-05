@@ -10,7 +10,7 @@ def tick(game):
     def get_tick_delay():
         iron = game.state.board.cur_block.iron
         level = game.state.get_level()
-        return 1 / (2 * level) if iron else 1 / level
+        return 1 / (2.5 * level) if iron else 1 / (1.25 * level)
 
     game.state.play_time += 1
     game.state.board.time_to_rotate -= 1
