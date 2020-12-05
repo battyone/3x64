@@ -28,7 +28,7 @@ def get_vertical_frame(height):
 
 def get_angles(width):
     return [
-            f"╔{' ' * width}╗",
+            f"╦{' ' * width}╦",
             *["" for _ in range(width // 2)],
             f"╚{' ' * width}╝"
     ]
