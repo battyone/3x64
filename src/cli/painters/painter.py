@@ -1,5 +1,3 @@
-from game.rules.move import can_move
-
 def draw_panel(screen, panel: [str], start_x, start_y, palette):
     for i, line in enumerate(panel):
         screen.addstr(start_y + i, start_x, line, palette)
