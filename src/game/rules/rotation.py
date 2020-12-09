@@ -1,29 +1,26 @@
 from .helpers import get_all_cols, Sequence
-from .gravity import pull_down
-from .collision import handle_collisions
 
-def handle_rotation(game):
-    def rotate_clockwise():
-        cols : [Sequence] = list(get_all_cols(game.state.board.xy))
-        for y in range(len(game.state.board.xy)):
-            game.state.board.xy[y] = [block for (block, _, _) in reversed(cols[y])]
-
-    def rotate_counterclockwise():
-        cols : [Sequence] = list(get_all_cols(game.state.board.xy))
-        for y in range(len(cols)):
-            game.state.board.xy[-y-1] = [block for (block, _, _) in cols[y]]
-
-    if game.state.board.time_to_rotate > 0:
+def check_rotation(game):
+    board = game.state.board
+    if board.time_to_rotate > 0:
         return
-    if game.state.board.clockwise:
-        rotate_clockwise()
-        game.state.last_event = (game.state.play_time, '> ROTATE >')
-        game.state.board.sides = game.state.board.sides[-1:] + game.state.board.sides[:-1]
-    else:
-        rotate_counterclockwise()
-        game.state.last_event = (game.state.play_time, '< ROTATE <')
-        game.state.board.sides = game.state.board.sides[1:] + game.state.board.sides[:1]
 
-    pull_down(game)
-    handle_collisions(game)
-    game.state.board.time_to_rotate = game.settings.max_time_to_rotate
+    board.time_to_rotate = game.settings.max_time_to_rotate
+    cols : [Sequence] = list(get_all_cols(board.xy))
+
+    if board.clockwise:
+        rotate_clockwise(board, cols)
+        game.events.call('board_rotated', True)
+    else:
+        rotate_counterclockwise(board, cols)
+        game.events.call('board_rotated', False)
+
+def rotate_clockwise(board, cols):
+    board.sides = board.sides[-1:] + board.sides[:-1]
+    for y in range(len(cols)):
+        board.xy[y] = [block for (block, _, _) in reversed(cols[y])]
+
+def rotate_counterclockwise(board, cols):
+    board.sides = board.sides[1:] + board.sides[:1]
+    for y in range(len(cols)):
+        board.xy[-(y+1)] = [block for (block, _, _) in cols[y]]

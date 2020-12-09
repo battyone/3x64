@@ -1,4 +1,4 @@
-from .painter import draw_panel, draw_data
+from ..helpers.painter import draw_panel, draw_data
 from .board import get_board_left, get_board_top
 
 def draw_left_panel(client, screen):
@@ -23,8 +23,8 @@ def get_frame():
         "├──────────────",
         "│ Time:  ",
         "╞ Controls ════",
+        "│ [1]—[5] Bonus",
         "│[a][s][d] Move",
-        "│[←][↓][→]",
         "│[P]ause [Q]uit",
         "└──────────────"
     ]

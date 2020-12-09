@@ -1,4 +1,4 @@
-from .painter import get_block_size, draw_panel
+from ..helpers.painter import get_block_size, draw_panel
 from .board import get_board_top, get_board_left
 
 def draw_pause(client, screen):

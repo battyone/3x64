@@ -9,3 +9,14 @@
 │ 2 creew 1520 ║                  ║──────────────┤
 │ 3            ║                  ║ Destr. Iron [5]
 └──────────────╚═══───────────────╝──────────────┘
+
+   PowerUps:     Crafted:      How:
+| TNT         | Color Bomb  = Color Block + TNT
+| Color Block | Anvil TNT   = Anvil       + TNT
+| Anvil       | Damage Iron = Remove Blks + Remove Blks
+| Remove Line | Shooter     = ???
+| Change Dir. | Arkanoid    = TNT         + Remove Line
+| Remove Blks | Big TNT     = TNT         + TNT
+              | Stop Time   = Change Dir. + Change Dir.
+              | Mega Anvil  = Anvil       + Anvil
+              | Snap        = Color Block + Color Block + Color Block

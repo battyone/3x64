@@ -1,4 +1,4 @@
-from .painter import get_block_size, draw_panel, get_palette_by_side
+from ..helpers.painter import get_block_size, draw_panel
 
 def draw_board_frame(client, screen):
     block = get_block_size(client, screen)
@@ -12,6 +12,10 @@ def draw_board_frame(client, screen):
     draw_panel(screen, get_top_frame(width), left+1, top, get_palette_by_side(client, 2))
     draw_panel(screen, get_vertical_frame(width//2), left, top+1, get_palette_by_side(client, 1))
     draw_panel(screen, get_bottom_frame(client, width), left+1, top+width//2+1,get_palette_by_side(client))
+
+def get_palette_by_side(client, i=0):
+    side = client.game.state.board.sides[i]
+    return client.palettes[f'{side}']
 
 def get_top_frame(width):
     return ['═' * width]

@@ -1,4 +1,4 @@
-from .painter import draw_panel, get_block_size, draw_data
+from ..helpers.painter import draw_panel, get_block_size, draw_data
 from .board import get_board_left, get_board_top
 
 def draw_right_panel(client, screen):
